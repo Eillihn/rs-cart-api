@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
+// import AWS from 'aws-sdk';
 import { Controller, Get, Delete, Put, Body, Req, Post, UseGuards, HttpStatus } from '@nestjs/common';
 // import { BasicAuthGuard, JwtAuthGuard } from '../auth';
 import { OrderService } from '../order';
@@ -7,7 +7,7 @@ import { AppRequest, getUserIdFromRequest } from '../shared';
 import { calculateCartTotal } from './models-rules';
 import { CartService } from './services';
 import { lookup } from '../db/client';
-const lambda = new AWS.Lambda();
+// const lambda = new AWS.Lambda();
 
 @Controller('api/profile/cart')
 export class CartController {
@@ -35,7 +35,7 @@ export class CartController {
             [userId]
         );
 
-        const productIdList = result.rows.map(result => result.product_id);
+        /*const productIdList = result.rows.map(result => result.product_id);
 
         await Promise.all(productIdList.map((productId) => {
           const getProductsByIdParams = {
@@ -71,7 +71,31 @@ export class CartController {
 
             return accumulator;
           }, []);
-        });
+        });*/
+
+        carts = result.rows.reduce((accumulator, cart) => {
+          const existingEntry = accumulator.find(entry => entry.id === cart.id);
+          const product = { id: cart.product_id };
+
+          if (existingEntry) {
+            existingEntry.items.push({
+              product,
+              count: cart.count
+            });
+          } else {
+            accumulator.push({
+              ...cart,
+              items: [
+                {
+                  product,
+                  count: cart.count
+                }
+              ]
+            });
+          }
+
+          return accumulator;
+        }, []);
       }
     } catch (error) {
       console.error('Error executing query', error);
