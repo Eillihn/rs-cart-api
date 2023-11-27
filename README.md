@@ -73,3 +73,30 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+## Docker:
+
+Run docker:
+1) sudo service docker start
+2) sudo dockerd
+
+Build and run docker image:
+1) sudo docker buildx build --tag=cart-api --build-arg DATABASE_PASSWORD=%DATABASE_PASSWORD% .
+2) docker run -p 3000:3000 cart-api
+
+Stop docker image:
+1) docker ps
+2) docker stop %container id%
+
+## AWS Elastic Beanstalk
+
+Initiate Elastic Beanstalk Application:
+eb init -p docker Eillihn-cart-api --region us-east-1
+
+Create Elastic Beanstalk Environment:
+eb create prod --cname Eillihn-cart-api-prod --single
+
+Deploy:
+eb setenv DATABASE_PASSWORD=%DATABASE_PASSWORD%
+
+
