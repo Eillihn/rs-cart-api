@@ -18,7 +18,7 @@ jobs:
           subject: Tests reports are ready
           body: The workflow in Testing Tool has completed successfully.
       - name: Microsoft Teams Webhook Notifications
-          uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
-          with:
-            webhook: https://teams.microsoft.com/l/channel/19%3aCgpc5mQ8RouKC9tOzVH4s2gKj96JpAw67j4UambaA1I1%40thread.tacv2/General?groupId=c0738852-eccf-4532-9b3c-b5cf7bf66b42&tenantId=b41b72d0-4e9f-4c26-8a69-f949f367c91d
-            message: Tests reports are ready
+        uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
+        with:
+          webhook: https://teams.microsoft.com/l/channel/19%3aCgpc5mQ8RouKC9tOzVH4s2gKj96JpAw67j4UambaA1I1%40thread.tacv2/General?groupId=c0738852-eccf-4532-9b3c-b5cf7bf66b42&tenantId=b41b72d0-4e9f-4c26-8a69-f949f367c91d
+          message: Tests reports are ready
