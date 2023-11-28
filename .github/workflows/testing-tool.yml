@@ -15,6 +15,7 @@ jobs:
         uses: dawidd6/action-send-mail@v3.9.0
         with:
           to: hanna_svirskaya@epam.com
+          from: hanna_svirskaya@epam.com
           subject: Tests reports are ready
           body: The workflow in Testing Tool has completed successfully.
       - name: Microsoft Teams Webhook Notifications
